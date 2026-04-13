@@ -116,30 +116,27 @@
             });
         }
     };
-    function searchInfo() {
+        function searchInfo() {
         const v = villSel.value;
         const s = document.getElementById('service').value;
         const res = document.getElementById('result');
         
-        if(!v || !s) { alert("সবগুলো ঘর পূরণ করুন"); return; }
+        if(!v || !s) { 
+            alert("সবগুলো ঘর পূরণ করুন"); 
+            return; 
+        }
         
         res.style.display = "block";
         
-        // আপনার নতুন অ্যাম্বুলেন্স নম্বরটি এখানে সেট করে দিচ্ছি
         if(s === "অ্যাম্বুলেন্স") {
             res.innerHTML = `<strong>🚑 অ্যাম্বুলেন্স সেবা (নেত্রকোনা/মদন):</strong><br>
-            কল করুন: <a href="tel:01775226384">01775226384</a><br>
+            কল করুন: <a href="tel:01775226384" style="color: blue; text-decoration: underline;">01775226384</a><br>
             <em>সার্বক্ষণিক সেবা পাওয়া যাবে।</em>`;
         } else {
             res.innerHTML = `<strong>📌 ফলাফল:</strong><br> বর্তমানে "${v}" এলাকায় "${s}" সেবার কোনো নম্বর নেই। আপনার কাছে থাকলে নিচে হোয়াটসঅ্যাপ করুন।`;
         }
     }
 
-
-        res.style.display = "block";
-        let locationText = vil ? `${vil} গ্রাম, ${th} থানা` : `${th} থানা`;
-        res.innerHTML = `<strong>📌 ফলাফল:</strong><br> বর্তমানে ${locationText} এলাকায় "${serv}" ক্যাটাগরিতে কোনো নম্বর নেই। অনুগ্রহ করে হোয়াটসঅ্যাপে তথ্য দিয়ে আমাদের সাহায্য করুন।`;
-    }
 
     function sendToWhatsApp() {
         const name = document.getElementById('wa-name').value;
