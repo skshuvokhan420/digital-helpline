@@ -133,7 +133,7 @@
             কল করুন: <a href="tel:01775226384" style="color: blue; text-decoration: underline;">01775226384</a><br>
             <em>সার্বক্ষণিক সেবা পাওয়া যাবে।</em>`;
         } else {
-            res.innerHTML = `<strong>📌 ফলাফল:</strong><br> বর্তমানে "${v}" এলাকায় "${s}" সেবার কোনো নম্বর নেই। আপনার কাছে থাকলে নিচে হোয়াটসঅ্যাপ করুন।`;
+            res.innerHTML = `<strong>📌 ফলাফল:0175863589
         }
     }
 
