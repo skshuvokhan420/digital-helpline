@@ -133,31 +133,28 @@
     const s = document.getElementById('service').value;
     const res = document.getElementById('result-box');
 
-    // ৯৯৯ এর জন্য সরাসরি কল ব্যবস্থা
+    // ৯৯৯-এর জন্য সরাসরি কল
     if (s === "জরুরি নাম্বার") {
         window.location.href = "tel:999";
         return; 
     }
 
-    // অন্য সেবার ক্ষেত্রে চেক করবে
+    // যদি ঘর খালি থাকে (আগের অ্যালার্ট)
     if (!v || !s) {
         alert("সবগুলো ঘর পূরণ করুন");
         return;
     }
 
-    res.style.display = "block";
-    res.innerHTML = `<strong>📌 ফলাফল:</strong> সার্ভিসটি প্রক্রিয়াধীন...`;
-}
-
-
-    function sendToWhatsApp() {
-        const name = document.getElementById('wa-name').value;
-        const phone = document.getElementById('wa-phone').value;
-        const loc = document.getElementById('wa-loc').value;
-        if(!name || !phone || !loc) { alert("সব তথ্য পূরণ করুন"); return; }
-        const text = `হ্যালো শুভ ভাই, নতুন তথ্য:%0A👤 নাম: ${name}%0A📞 নম্বর: ${phone}%0A📍 এলাকা: ${loc}`;
-        window.open(`https://api.whatsapp.com/send?phone=${myNumber}&text=${text}`, '_blank');
+    // এখানে চেক করা হচ্ছে ডাটা আছে কি না
+    // যদি ডাটাবেজে এই সার্ভিস বা গ্রামের তথ্য না থাকে
+    if (!v || v === "" || v === "অন্যান্য/হাতে লিখুন") {
+        res.style.display = "block";
+        res.innerHTML = "<div style='color:red; font-weight:bold;'>দুঃখিত, কোনো নাম্বার পাওয়া যায়নি!</div>";
+        alert("দুঃখিত, কোনো নাম্বার নাই"); // এই সেই পুরনো কথা যা আপনি চাচ্ছেন
+        return;
     }
-</script>
-</body>
-</html>
+
+    // যদি ডাটা থাকে তবে ফলাফল দেখাবে
+    res.style.display = "block";
+    res.innerHTML = `<strong>📌 ফলাফল:</strong> সার্ভিসটি বর্তমানে আপডেট করা হচ্ছে।`;
+}
