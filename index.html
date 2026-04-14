@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ডিজিটাল হেল্পライン - এস.কে. শুভ</title>
+    <title>ডিজিটাল হেল্পলাইন - এস.কে. শুভ</title>
     <style>
         :root { --primary: #009432; --whatsapp: #25D366; --bg: #f0f2f5; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
@@ -32,6 +32,7 @@
         <option value="Mymensingh">ময়মনসিংহ</option>
         <option value="Chattogram">চট্টগ্রাম</option>
         <option value="Rajshahi">রাজশাহী</option>
+        <option value="Sylhet">সিলেট</option>
     </select>
 
     <label>জেলা</label>
@@ -44,10 +45,10 @@
         <option value="">আগে জেলা বেছে নিন</option>
     </select>
 
-    <div id="village-area">
-        <label>গ্রামের নাম লিখুন</label>
-        <input type="text" id="village" placeholder="আপনার গ্রামের নাম লিখুন">
-    </div>
+    <label>গ্রাম নির্বাচন করুন</label>
+    <select id="village">
+        <option value="">আগে থানা বেছে নিন</option>
+    </select>
 
     <label>প্রয়োজনীয় সেবা</label>
     <select id="service">
@@ -56,8 +57,6 @@
         <option value="অ্যাম্বুলেন্স">🚑 অ্যাম্বুলেন্স</option>
         <option value="ফায়ার সার্ভিস">🔥 ফায়ার সার্ভিস</option>
         <option value="পুলিশ">🚓 পুলিশ/থানা</option>
-        <option value="ডাক্তার">👨‍⚕️ বিশেষজ্ঞ ডাক্তার</option>
-        <option value="ফার্মেসি">💊 ফার্মেসি</option>
     </select>
 
     <button onclick="searchInfo()">🔍 তথ্য খুঁজুন</button>
@@ -76,59 +75,64 @@
 <script>
     const myNumber = "8801771100830"; 
 
-    const data = {
-        "Dhaka": {
-            "ঢাকা": ["মিরপুর", "উত্তরা", "ধানমন্ডি", "গুলশান", "সাভার"],
-            "গাজীপুর": ["গাজীপুর সদর", "কালিয়াকৈর", "শ্রীপুর"],
-            "টাঙ্গাইল": ["টাঙ্গাইল সদর", "মির্জাপুর", "কালিহাতী"]
-        },
-        "Mymensingh": {
-            "ময়মনসিংহ": ["ময়মনসিংহ সদর", "মুক্তাগাছা", "ত্রিশাল", "ফুলপুর"],
-            "নেত্রকোনা": ["নেত্রকোনা সদর", "মদন", "পূর্বধলা", "মোহনগঞ্জ", "কেন্দুয়া", "আটপাড়া", "কলমাকান্দা", "দুর্গাপুর", "বারহাট্টা", "খালিয়াজুরী"],
-            "শেরপুর": ["শেরপুর সদর", "নালিতাবাড়ী"],
-            "জামালপুর": ["জামালপুর সদর", "সরিষাবাড়ী"]
-        },
-        "Chattogram": {
-            "চট্টগ্রাম": ["কোতোয়ালি", "পতেঙ্গা", "হাটহাজারী"],
-            "কুমিল্লা": ["কুমিল্লা সদর", "চৌদ্দগ্রাম", "লাকসাম"]
-        }
+    const districtData = {
+        "Dhaka": ["ঢাকা", "গাজীপুর", "টাঙ্গাইল", "নারায়ণগঞ্জ"],
+        "Mymensingh": ["নেত্রকোনা", "ময়মনসিংহ", "শেরপুর", "জামালপুর"],
+        "Chattogram": ["চট্টগ্রাম", "কুমিল্লা", "কক্সবাজার"],
+        "Rajshahi": ["রাজশাহী", "বগুড়া", "পাবনা"],
+        "Sylhet": ["সিলেট", "সুনামগঞ্জ", "মৌলভীবাজার"]
+    };
+
+    const thanaData = {
+        "নেত্রকোনা": ["নেত্রকোনা সদর", "মদন", "পূর্বধলা", "মোহনগঞ্জ", "কেন্দুয়া", "আটপাড়া", "কলমাকান্দা", "দুর্গাপুর", "বারহাট্টা", "খালিয়াজুরী"]
+    };
+
+    const villageData = {
+        "মদন": ["মদন পৌরসভা", "জাহাঙ্গীরাবাদ", "পদমশ্রী", "মাঘান", "তিয়শ্রী", "গোবিন্দশ্রী", "নায়েকপুর", "ফতেপুর"],
+        "নেত্রকোনা সদর": ["সদর পৌরসভা", "রাজুর বাজার", "বিরামপুর"],
+        "কেন্দুয়া": ["কেন্দুয়া পৌরসভা", "রোয়াইলবাড়ি"]
     };
 
     const divisionSelect = document.getElementById('division');
     const districtSelect = document.getElementById('district');
     const thanaSelect = document.getElementById('thana');
+    const villageSelect = document.getElementById('village');
 
     divisionSelect.onchange = function() {
         districtSelect.innerHTML = '<option value="">জেলা সিলেক্ট করুন</option>';
         thanaSelect.innerHTML = '<option value="">আগে জেলা বেছে নিন</option>';
+        villageSelect.innerHTML = '<option value="">আগে থানা বেছে নিন</option>';
         if (this.value) {
-            for (let dist in data[this.value]) {
-                districtSelect.add(new Option(dist, dist));
-            }
+            districtData[this.value].forEach(d => districtSelect.add(new Option(d, d)));
         }
     };
 
     districtSelect.onchange = function() {
         thanaSelect.innerHTML = '<option value="">থানা সিলেক্ট করুন</option>';
-        const selectedDiv = divisionSelect.value;
-        const selectedDist = this.value;
-        if (selectedDist) {
-            data[selectedDiv][selectedDist].forEach(th => {
-                thanaSelect.add(new Option(th, th));
-            });
+        villageSelect.innerHTML = '<option value="">আগে থানা বেছে নিন</option>';
+        if (this.value && thanaData[this.value]) {
+            thanaData[this.value].forEach(t => thanaSelect.add(new Option(t, t)));
+        } else {
+            thanaSelect.add(new Option("অন্যান্য", "অন্যান্য"));
+        }
+    };
+
+    thanaSelect.onchange = function() {
+        villageSelect.innerHTML = '<option value="">গ্রাম সিলেক্ট করুন</option>';
+        if (this.value && villageData[this.value]) {
+            villageData[this.value].forEach(v => villageSelect.add(new Option(v, v)));
+        } else {
+            villageSelect.add(new Option("অন্যান্য/হাতে লিখুন", "অন্যান্য"));
         }
     };
 
     function searchInfo() {
-        const th = thanaSelect.value;
-        const vil = document.getElementById('village').value;
-        const serv = document.getElementById('service').value;
+        const v = villageSelect.value;
+        const s = document.getElementById('service').value;
         const res = document.getElementById('result');
-        if(!th || !serv) { alert("বিভাগ, জেলা, থানা এবং সেবা সিলেক্ট করুন"); return; }
-        
+        if(!v || !s) { alert("সবগুলো ঘর পূরণ করুন"); return; }
         res.style.display = "block";
-        let locationText = vil ? `${vil} গ্রাম, ${th} থানা` : `${th} থানা`;
-        res.innerHTML = `<strong>📌 ফলাফল:</strong><br> বর্তমানে ${locationText} এলাকায় "${serv}" ক্যাটাগরিতে কোনো নম্বর নেই। অনুগ্রহ করে হোয়াটসঅ্যাপে তথ্য দিয়ে আমাদের সাহায্য করুন।`;
+        res.innerHTML = `<strong>📌 ফলাফল:</strong><br> বর্তমানে "${v}" এলাকায় "${s}" ক্যাটাগরিতে কোনো নম্বর নেই।`;
     }
 
     function sendToWhatsApp() {
@@ -136,7 +140,7 @@
         const phone = document.getElementById('wa-phone').value;
         const loc = document.getElementById('wa-loc').value;
         if(!name || !phone || !loc) { alert("সব তথ্য পূরণ করুন"); return; }
-        const text = `হ্যালো শুভ ভাই,%0Aনতুন তথ্য যোগ করতে চাই:%0A👤 নাম: ${name}%0A📞 নম্বর: ${phone}%0A📍 এলাকা: ${loc}`;
+        const text = `হ্যালো শুভ ভাই, নতুন তথ্য:%0A👤 নাম: ${name}%0A📞 নম্বর: ${phone}%0A📍 এলাকা: ${loc}`;
         window.open(`https://api.whatsapp.com/send?phone=${myNumber}&text=${text}`, '_blank');
     }
 </script>
