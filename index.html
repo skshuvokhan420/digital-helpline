@@ -129,14 +129,26 @@
     };
 
     function searchInfo() {
-        const v = villageSelect.value;
-        const s = document.getElementById('service').value;
-        const res = document.getElementById('result');
-        if(!v || !s) { alert("সবগুলো ঘর পূরণ করুন"); return; }
-        res.style.display = "block";
-        res.innerHTML = `<strong>📌 ফলাফল:</strong><br> বর্তমানে "${v}" এলাকায় "${s}" ক্যাটাগরিতে কোনো নম্বর নেই।`;
-   
- }
+    const v = villageSelect.value;
+    const s = document.getElementById('service').value;
+    const res = document.getElementById('result-box');
+
+    // ৯৯৯ এর জন্য সরাসরি কল ব্যবস্থা
+    if (s === "জরুরি নাম্বার") {
+        window.location.href = "tel:999";
+        return; 
+    }
+
+    // অন্য সেবার ক্ষেত্রে চেক করবে
+    if (!v || !s) {
+        alert("সবগুলো ঘর পূরণ করুন");
+        return;
+    }
+
+    res.style.display = "block";
+    res.innerHTML = `<strong>📌 ফলাফল:</strong> সার্ভিসটি প্রক্রিয়াধীন...`;
+}
+
 
     function sendToWhatsApp() {
         const name = document.getElementById('wa-name').value;
