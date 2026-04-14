@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ডিজিটাল হেল্পলাইন - এস.কে. শুভ</title>
+    <title>ডিজিটাল হেল্পライン - এস.কে. শুভ</title>
     <style>
         :root { --primary: #009432; --whatsapp: #25D366; --bg: #f0f2f5; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
@@ -39,13 +39,15 @@
         <option value="">আগে বিভাগ বেছে নিন</option>
     </select>
 
-    <label>থানা</label>
+    <label>থানা/উপজেলা</label>
     <select id="thana">
         <option value="">আগে জেলা বেছে নিন</option>
     </select>
 
-    <label>গ্রামের নাম লিখুন (ঐচ্ছিক)</label>
-    <input type="text" id="village" placeholder="আপনার গ্রামের নাম লিখুন">
+    <div id="village-area">
+        <label>গ্রামের নাম লিখুন</label>
+        <input type="text" id="village" placeholder="আপনার গ্রামের নাম লিখুন">
+    </div>
 
     <label>প্রয়োজনীয় সেবা</label>
     <select id="service">
@@ -82,7 +84,7 @@
         },
         "Mymensingh": {
             "ময়মনসিংহ": ["ময়মনসিংহ সদর", "মুক্তাগাছা", "ত্রিশাল", "ফুলপুর"],
-            "নেত্রকোনা": ["নেত্রকোনা সদর", "মদন", "পূর্বধলা", "মোহনগঞ্জ", "কেন্দুয়া", "আটপাড়া", "কলমাকান্দা", "দুর্গাপুর"],
+            "নেত্রকোনা": ["নেত্রকোনা সদর", "মদন", "পূর্বধলা", "মোহনগঞ্জ", "কেন্দুয়া", "আটপাড়া", "কলমাকান্দা", "দুর্গাপুর", "বারহাট্টা", "খালিয়াজুরী"],
             "শেরপুর": ["শেরপুর সদর", "নালিতাবাড়ী"],
             "জামালপুর": ["জামালপুর সদর", "সরিষাবাড়ী"]
         },
