@@ -3,160 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ডিজিটাল হেল্পলাইন - skshuvokhan</title>
+    <title>ডিজিটাল হেল্পলাইন - নেত্রকোনা</title>
     <style>
-        :root { --primary: #009432; --whatsapp: #25D366; --bg: #f0f2f5; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
-        .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 10px solid var(--primary); }
-        h2 { color: var(--primary); text-align: center; margin-bottom: 5px; }
-        .tagline { text-align: center; color: #666; font-size: 14px; margin-bottom: 20px; }
-        label { font-weight: bold; display: block; margin-top: 12px; color: #333; font-size: 14px;}
-        select, input, button { width: 100%; padding: 12px; margin-top: 5px; border-radius: 10px; border: 1px solid #ddd; font-size: 16px; outline: none; box-sizing: border-box; }
-        button { background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        .wa-section { background: #e7f3ff; padding: 15px; border-radius: 15px; margin-top: 30px; border: 1px solid #b2d7ff; }
-        .wa-btn { background: var(--whatsapp); color: white; border: none; }
-        .result-box { margin-top: 20px; padding: 15px; background: #fff9c4; border-radius: 10px; border-left: 5px solid #fbc02d; display: none; font-size: 16px; line-height: 1.6; }
-        footer { text-align: center; margin-top: 20px; font-size: 12px; color: #888; }
-        a { color: blue; text-decoration: underline; font-weight: bold; }
+        /* আপনার আগের ডিজাইন অনুযায়ী স্টাইল */
+        :root { --primary-color: #2c3e50; --secondary-color: #3498db; }
+        body { font-family: 'SolaimanLipi', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: var(--primary-color); }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; }
+        .btn-call { display: block; width: 100%; padding: 12px; background: #27ae60; color: white; text-align: center; text-decoration: none; border-radius: 8px; margin-top: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>🇧🇩 ডিজিটাল হেল্পলাইন</h2>
-    <p class="tagline">উদ্যোক্তা: এস.কে. শুভ (skshuvokhan)</p>
+    <h2>ডিজিটাল হেল্পলাইন</h2>
     
-    <label>বিভাগ</label>
-    <select id="division">
-        <option value="">বিভাগ বেছে নিন</option>
-        <option value="Mymensingh">ময়মনসিংহ</option>
-        <option value="Dhaka">ঢাকা</option>
-    </select>
-
-    <label>জেলা</label>
-    <select id="district">
-        <option value="">আগে বিভাগ বেছে নিন</option>
-    </select>
-
-    <label>থানা</label>
-    <select id="thana">
-        <option value="">আগে জেলা বেছে নিন</option>
-    </select>
-
-    <label>গ্রাম</label>
-    <select id="village">
-        <option value="">আগে থানা বেছে নিন</option>
-    </select>
-
-    <label>সেবা</label>
-    <select id="service">
-        <option value="">সেবা নির্বাচন করুন</option>
-        <option value="অ্যাম্বুলেন্স">🚑 অ্যাম্বুলেন্স</option>
-        <option value="রক্তদাতা">🩸 রক্তদাতা (Blood)</option>
-        <option value="ফায়ার সার্ভিস">🔥 ফায়ার সার্ভিস</option>
-        <option value="পুলিশ">🚓 পুলিশ/থানা</option>
-        <option value="ডাক্তার">👨‍⚕️ বিশেষজ্ঞ ডাক্তার</option>
-    </select>
-
-    <button onclick="searchInfo()">🔍 তথ্য খুঁজুন</button>
-    <div id="result" class="result-box"></div>
-
-    <div class="wa-section">
-        <h3 style="margin:0 0 10px 0; color: #0d47a1; font-size: 18px;">📝 নতুন তথ্য যোগ করুন</h3>
-        <input type="text" id="wa-name" placeholder="প্রতিষ্ঠানের বা ব্যক্তির নাম">
-        <input type="tel" id="wa-phone" placeholder="মোবাইল নম্বর">
-        <input type="text" id="wa-loc" placeholder="গ্রামের নাম ও বিস্তারিত ঠিকানা">
-        <button class="wa-btn" onclick="sendToWhatsApp()">📲 হোয়াটসঅ্যাপে পাঠান</button>
+    <div class="form-group">
+        <label>জেলা নির্বাচন করুন:</label>
+        <select id="district">
+            <option value="netrokona">নেত্রকোনা</option>
+        </select>
     </div>
-    <footer>Developed by S.K. Shuvo | skshuvokhan420</footer>
+
+    <div class="form-group">
+        <label>উপজেলা নির্বাচন করুন:</label>
+        <select id="upazila">
+            <option value="">নির্বাচন করুন</option>
+            <option value="madon">মদন</option>
+            <option value="sodar">নেত্রকোনা সদর</option>
+            <option value="kendua">কেন্দুয়া</option>
+            <option value="purbodhala">পূর্বধলা</option>
+            <option value="mohongonj">মোহনগঞ্জ</option>
+            <option value="barhatta">বারহাট্টা</option>
+            <option value="kalmakanda">কলমাকান্দা</option>
+            <option value="durgapur">দুর্গাপুর</option>
+            <option value="khaliajuri">খালিয়াজুরী</option>
+            <option value="atpara">আটপাড়া</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>সেবার ধরন:</label>
+        <select id="service">
+            <option value="">নির্বাচন করুন</option>
+            <option value="ambulance">অ্যাম্বুলেন্স</option>
+            <option value="fire">ফায়ার সার্ভিস</option>
+            <option value="police">পুলিশ</option>
+            <option value="blood">রক্তদাতা</option>
+        </select>
+    </div>
+
+    <div id="result-area">
+        </div>
 </div>
 
 <script>
-    const myNumber = "8801771100830"; 
-
-    const hierarchy = {
-        "Mymensingh": {
-            "নেত্রকোনা": {
-                "মদন": ["মদন সদর", "মাঘান", "গোবিন্দশ্রী", "তিয়শ্রী", "অন্যান্য"],
-                "নেত্রকোনা সদর": ["সাতপাই", "রাজুর বাজার", "অন্যান্য"],
-                "পূর্বধলা": ["পূর্বধলা সদর", "জারিয়া", "অন্যান্য"]
-            },
-            "ময়মনসিংহ": {
-                "ময়মনসিংহ সদর": ["চরপাড়া", "গাঙ্গিনারপাড়", "অন্যান্য"]
-            }
-        },
-        "Dhaka": {
-            "ঢাকা": {
-                "মিরপুর": ["মিরপুর-১", "মিরপুর-১০", "অন্যান্য"]
-            }
-        }
-    };
-
-    const divSel = document.getElementById('division');
-    const distSel = document.getElementById('district');
-    const thanaSel = document.getElementById('thana');
-    const villSel = document.getElementById('village');
-
-    divSel.onchange = function() {
-        distSel.innerHTML = '<option value="">জেলা সিলেক্ট করুন</option>';
-        thanaSel.innerHTML = '<option value="">আগে জেলা বেছে নিন</option>';
-        villSel.innerHTML = '<option value="">আগে থানা বেছে নিন</option>';
-        if (this.value) {
-            for (let dist in hierarchy[this.value]) {
-                distSel.add(new Option(dist, dist));
-            }
-        }
-    };
-
-    distSel.onchange = function() {
-        thanaSel.innerHTML = '<option value="">থানা সিলেক্ট করুন</option>';
-        villSel.innerHTML = '<option value="">আগে থানা বেছে নিন</option>';
-        if (this.value) {
-            for (let thana in hierarchy[divSel.value][this.value]) {
-                thanaSel.add(new Option(thana, thana));
-            }
-        }
-    };
-
-    thanaSel.onchange = function() {
-        villSel.innerHTML = '<option value="">গ্রাম সিলেক্ট করুন</option>';
-        if (this.value) {
-            hierarchy[divSel.value][distSel.value][this.value].forEach(v => {
-                villSel.add(new Option(v, v));
-            });
-        }
-    };
-
-    function searchInfo() {
-        const v = villSel.value;
-        const s = document.getElementById('service').value;
-        const res = document.getElementById('result');
-        
-        if(!v || !s) { 
-            alert("সবগুলো ঘর পূরণ করুন"); 
-            return; 
-        }
-        
-        res.style.display = "block";
-        
-        if(s === "অ্যাম্বুলেন্স") {
-            res.innerHTML = `<strong>🚑 অ্যাম্বুলেন্স সেবা:</strong><br>
-            এলাকা: ${v}<br>
-            কল করুন: <a href="tel:01771100830">01771100830</a><br>
-            <em>(সার্বক্ষণিক সেবার জন্য কল দিন)</em>`;
-        } else {
-            res.innerHTML = `<strong>📌 ফলাফল:</strong><br> বর্তমানে "${v}" এলাকায় এই মুহূর্তে "${s}" সেবার কোনো নম্বর আমাদের ডাটাবেজে নেই। আপনার কাছে কোনো নম্বর থাকলে নিচে হোয়াটসঅ্যাপ করুন।`;
-        }
-    }
-
-    function sendToWhatsApp() {
-        const n = document.getElementById('wa-name').value;
-        const p = document.getElementById('wa-phone').value;
-        const l = document.getElementById('wa-loc').value;
-        if(!n || !p || !l) { alert("সবগুলো তথ্য দিন"); return; }
-        const text = `হ্যালো শুভ ভাই, নতুন তথ্য যোগ করুন:%0A👤 নাম: ${n}%0A📞 নম্বর: ${p}%0A📍 ঠিকানা: ${l}`;
-        window.open(`https://api.whatsapp.com/send?phone=${myNumber}&text=${text}`, '_blank');
-    }
+    // এখানে আপনি ভবিষ্যতে জাভাস্ক্রিপ্ট দিয়ে নম্বরগুলো কন্ট্রোল করতে পারবেন
+    // আপাতত এটি আপনার অ্যাপের কাঠামো তৈরি করে দিল
 </script>
+
 </body>
 </html>
