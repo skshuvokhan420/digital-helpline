@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ডিজিটাল হেল্পলাইন - নেত্রকোনা</title>
     <style>
-        /* আপনার আগের ডিজাইন অনুযায়ী স্টাইল */
         :root { --primary-color: #2c3e50; --secondary-color: #3498db; }
-        body { font-family: 'SolaimanLipi', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
-        .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: var(--primary-color); }
+        body { font-family: 'Arial', sans-serif; background-color: #f4f7f6; margin: 0; padding: 15px; }
+        .container { max-width: 450px; margin: auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #27ae60; margin-bottom: 20px; }
         .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; }
-        .btn-call { display: block; width: 100%; padding: 12px; background: #27ae60; color: white; text-align: center; text-decoration: none; border-radius: 8px; margin-top: 10px; font-weight: bold; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
+        select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc; font-size: 16px; background: #fff; appearance: none; }
+        .btn-call { display: block; width: 100%; padding: 12px; background: #27ae60; color: white; text-align: center; text-decoration: none; border-radius: 8px; margin-top: 20px; font-weight: bold; font-size: 18px; }
     </style>
 </head>
 <body>
@@ -22,7 +21,7 @@
     <h2>ডিজিটাল হেল্পলাইন</h2>
     
     <div class="form-group">
-        <label>জেলা নির্বাচন করুন:</label>
+        <label>জেলা:</label>
         <select id="district">
             <option value="netrokona">নেত্রকোনা</option>
         </select>
@@ -59,11 +58,6 @@
     <div id="result-area">
         </div>
 </div>
-
-<script>
-    // এখানে আপনি ভবিষ্যতে জাভাস্ক্রিপ্ট দিয়ে নম্বরগুলো কন্ট্রোল করতে পারবেন
-    // আপাতত এটি আপনার অ্যাপের কাঠামো তৈরি করে দিল
-</script>
 
 </body>
 </html>
