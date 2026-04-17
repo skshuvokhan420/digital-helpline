@@ -13,9 +13,10 @@
         label { font-weight: bold; display: block; margin-top: 15px; color: #333; }
         select, input, button { width: 100%; padding: 12px; margin-top: 8px; border-radius: 10px; border: 1px solid #ddd; font-size: 16px; outline: none; box-sizing: border-box; }
         button { background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+        button:hover { background: #006266; }
         .wa-section { background: #e7f3ff; padding: 15px; border-radius: 15px; margin-top: 30px; border: 1px solid #b2d7ff; }
         .wa-btn { background: var(--whatsapp); color: white; border: none; }
-        .result-box { margin-top: 20px; padding: 15px; background: #fff9c4; border-radius: 10px; border-left: 5px solid #fbc02d; display: none; }
+        .result-box { margin-top: 20px; padding: 15px; background: #fff9c4; border-radius: 10px; border-left: 5px solid #fbc02d; display: none; font-size: 15px; }
         footer { text-align: center; margin-top: 20px; font-size: 12px; color: #888; }
     </style>
 </head>
@@ -23,138 +24,123 @@
 
 <div class="container">
     <h2>🇧🇩 ডিজিটাল হেল্পলাইন</h2>
-    <p class="tagline"> অ্যাপে কোন সমস্যা হলে সরাসরি যোগাযোগ করুন আমাদের সাথে নিচে হোয়াটসঅ্যাপ
+    <p class="tagline">আপনার প্রয়োজনে সবসময় পাশে</p>
     
-    <label>বিভাগ</label>
-    <select id="division">
+    <label>বিভাগ নির্বাচন করুন</label>
+    <select id="division" onchange="updateDistricts()">
         <option value="">বিভাগ বেছে নিন</option>
         <option value="Dhaka">ঢাকা</option>
         <option value="Mymensingh">ময়মনসিংহ</option>
         <option value="Chattogram">চট্টগ্রাম</option>
         <option value="Rajshahi">রাজশাহী</option>
         <option value="Sylhet">সিলেট</option>
+        <option value="Khulna">খুলনা</option>
+        <option value="Barishal">বরিশাল</option>
+        <option value="Rangpur">রংপুর</option>
     </select>
 
-    <label>জেলা</label>
+    <label>জেলা নির্বাচন করুন</label>
     <select id="district">
         <option value="">আগে বিভাগ বেছে নিন</option>
-    </select>
-
-    <label>থানা/উপজেলা</label>
-    <select id="thana">
-        <option value="">আগে জেলা বেছে নিন</option>
-    </select>
-
-    <label>গ্রাম নির্বাচন করুন</label>
-    <select id="village">
-        <option value="">আগে থানা বেছে নিন</option>
     </select>
 
     <label>প্রয়োজনীয় সেবা</label>
     <select id="service">
         <option value="">সেবা নির্বাচন করুন</option>
+        <option value="জরুরি নাম্বার">📞 জরুরি নাম্বার (999)</option>
         <option value="রক্তদাতা">🩸 রক্তদাতা (Blood)</option>
         <option value="অ্যাম্বুলেন্স">🚑 অ্যাম্বুলেন্স</option>
         <option value="ফায়ার সার্ভিস">🔥 ফায়ার সার্ভিস</option>
-        <option value="জরুরি নাম্বার">📞 জরুরি নাম্বার (999)</option>
-
-      <option   value="পুলিশ">🚓 পুলিশ/</option>
+        <option value="পুলিশ">🚓 পুলিশ/থানা</option>
+        <option value="ডাক্তার">👨‍⚕️ বিশেষজ্ঞ ডাক্তার</option>
+        <option value="ফার্মেসি">💊 ফার্মেসি</option>
+        <option value="হাসপাতাল">🏥 হাসপাতাল</option>
+        <option value="ইলেকট্রিশিয়ান">⚡ ইলেকট্রিশিয়ান</option>
+        <option value="আইনজীবী">⚖️ আইনজীবী</option>
+        <option value="সাংবাদিক">🎤 সাংবাদিক</option>
+        <option value="রেন্ট-এ-কার">🚗 রেন্ট-এ-কার</option>
+        <option value="পল্লী বিদ্যুৎ">💡 পল্লী বিদ্যুৎ</option>
     </select>
 
     <button onclick="searchInfo()">🔍 তথ্য খুঁজুন</button>
+
     <div id="result" class="result-box"></div>
 
     <div class="wa-section">
         <h3 style="margin:0 0 10px 0; color: #0d47a1; font-size: 18px;">📝 নতুন তথ্য যোগ করুন</h3>
-        <input type="text" id="wa-name" placeholder="প্রতিষ্ঠানের বা ব্যক্তির নাম">
+        <input type="text" id="wa-name" placeholder="নাম/প্রতিষ্ঠানের নাম">
         <input type="tel" id="wa-phone" placeholder="মোবাইল নম্বর">
-        <input type="text" id="wa-loc" placeholder="বিস্তারিত ঠিকানা ও গ্রামের নাম">
+        <input type="text" id="wa-loc" placeholder="বিস্তারিত ঠিকানা">
         <button class="wa-btn" onclick="sendToWhatsApp()">📲 হোয়াটসঅ্যাপে পাঠান</button>
     </div>
+
     <footer>Developed by S.K. Shuvo (skshuvokhan)</footer>
 </div>
 
 <script>
+    // আপনার হোয়াটসঅ্যাপ নম্বর (শুরুতে ৮৮ দিয়ে আপনার নম্বরটি বসাবেন)
     const myNumber = "8801771100830"; 
 
     const districtData = {
-        "Dhaka": ["ঢাকা", "গাজীপুর", "টাঙ্গাইল", "নারায়ণগঞ্জ"],
-        "Mymensingh": ["নেত্রকোনা", "ময়মনসিংহ", "শেরপুর", "জামালপুর"],
-        "Chattogram": ["চট্টগ্রাম", "কুমিল্লা", "কক্সবাজার"],
-        "Rajshahi": ["রাজশাহী", "বগুড়া", "পাবনা"],
-        "Sylhet": ["সিলেট", "সুনামগঞ্জ", "মৌলভীবাজার"]
+        "Dhaka": ["ঢাকা", "গাজীপুর", "নারায়ণগঞ্জ", "টাঙ্গাইল", "মানিকগঞ্জ"],
+        "Mymensingh": ["ময়মনসিংহ", "নেত্রকোনা", "শেরপুর", "জামালপুর"],
+        "Chattogram": ["চট্টগ্রাম", "কক্সবাজার", "কুমিল্লা", "ফেনী", "নোয়াখালী"],
+        "Rajshahi": ["রাজশাহী", "বগুড়া", "পাবনা", "নাটোর"],
+        "Sylhet": ["সিলেট", "মৌলভীবাজার", "হবিগঞ্জ", "সুনামগঞ্জ"],
+        "Khulna": ["খুলনা", "যশোর", "বাগেরহাট", "কুষ্টিয়া"],
+        "Barishal": ["বরিশাল", "ভোলা", "পিরোজপুর"],
+        "Rangpur": ["রংপুর", "দিনাজপুর", "কুড়িগ্রাম"]
     };
 
-    const thanaData = {
-        "নেত্রকোনা": ["নেত্রকোনা সদর", "মদন", "পূর্বধলা", "মোহনগঞ্জ", "কেন্দুয়া", "আটপাড়া", "কলমাকান্দা", "দুর্গাপুর", "বারহাট্টা", "খালিয়াজুরী"]
-    };
-
-    const villageData = {
-        "মদন": ["মদন পৌরসভা", "জাহাঙ্গীরাবাদ", "পদমশ্রী", "মাঘান", "তিয়শ্রী", "গোবিন্দশ্রী", "নায়েকপুর", "ফতেপুর"],
-        "নেত্রকোনা সদর": ["সদর পৌরসভা", "রাজুর বাজার", "বিরামপুর"],
-        "কেন্দুয়া": ["কেন্দুয়া পৌরসভা", "রোয়াইলবাড়ি"]
-    };
-
-    const divisionSelect = document.getElementById('division');
-    const districtSelect = document.getElementById('district');
-    const thanaSelect = document.getElementById('thana');
-    const villageSelect = document.getElementById('village');
-
-    divisionSelect.onchange = function() {
-        districtSelect.innerHTML = '<option value="">জেলা সিলেক্ট করুন</option>';
-        thanaSelect.innerHTML = '<option value="">আগে জেলা বেছে নিন</option>';
-        villageSelect.innerHTML = '<option value="">আগে থানা বেছে নিন</option>';
-        if (this.value) {
-            districtData[this.value].forEach(d => districtSelect.add(new Option(d, d)));
+    function updateDistricts() {
+        const div = document.getElementById('division').value;
+        const distSelect = document.getElementById('district');
+        distSelect.innerHTML = '<option value="">জেলা সিলেক্ট করুন</option>';
+        if(div) {
+            districtData[div].forEach(d => {
+                distSelect.add(new Option(d, d));
+            });
         }
-    };
-
-    districtSelect.onchange = function() {
-        thanaSelect.innerHTML = '<option value="">থানা সিলেক্ট করুন</option>';
-        villageSelect.innerHTML = '<option value="">আগে থানা বেছে নিন</option>';
-        if (this.value && thanaData[this.value]) {
-            thanaData[this.value].forEach(t => thanaSelect.add(new Option(t, t)));
-        } else {
-            thanaSelect.add(new Option("অন্যান্য", "অন্যান্য"));
-        }
-    };
-
-    thanaSelect.onchange = function() {
-        villageSelect.innerHTML = '<option value="">গ্রাম সিলেক্ট করুন</option>';
-        if (this.value && villageData[this.value]) {
-            villageData[this.value].forEach(v => villageSelect.add(new Option(v, v)));
-        } else {
-            villageSelect.add(new Option("অন্যান্য/হাতে লিখুন", "অন্যান্য"));
-        }
-    };
+    }
 
     function searchInfo() {
-    const v = villageSelect.value;
-    const s = document.getElementById('service').value;
-    const res = document.getElementById('result-box');
+        const dist = document.getElementById('district').value;
+        const serv = document.getElementById('service').value;
+        const res = document.getElementById('result');
 
-    // ৯৯৯-এর জন্য সরাসরি কল
-    if (s === "জরুরি নাম্বার") {
-        window.location.href = "tel:999";
-        return; 
-    }
+        // ৯৯৯ হলে সরাসরি কল
+        if (serv === "জরুরি নাম্বার") {
+            window.location.href = "tel:999";
+            return;
+        }
 
-    // যদি ঘর খালি থাকে (আগের অ্যালার্ট)
-    if (!v || !s) {
-        alert("সবগুলো ঘর পূরণ করুন");
-        return;
-    }
+        // যদি বিভাগ বা জেলা সিলেক্ট না থাকে
+        if(!dist || !serv) {
+            alert("দুঃখিত, কোনো তথ্য পাওয়া যায়নি! আগে বিভাগ ও জেলা সিলেক্ট করুন।");
+            return;
+        }
 
-    // এখানে চেক করা হচ্ছে ডাটা আছে কি না
-    // যদি ডাটাবেজে এই সার্ভিস বা গ্রামের তথ্য না থাকে
-    if (!v || v === "" || v === "অন্যান্য/হাতে লিখুন") {
+        // সাধারণ তথ্য না থাকলে আগের মতো অ্যালার্ট
         res.style.display = "block";
-        res.innerHTML = "<div style='color:red; font-weight:bold;'>দুঃখিত, কোনো নাম্বার পাওয়া যায়নি!</div>";
-        alert("দুঃখিত, কোনো নাম্বার নাই"); // এই সেই পুরনো কথা যা আপনি চাচ্ছেন
-        return;
+        res.innerHTML = `<strong>📌 ফলাফল:</strong><br> দুঃখিত, বর্তমানে এই এলাকায় "${serv}" ক্যাটাগরিতে কোনো নম্বর নেই।`;
+        alert("দুঃখিত, কোনো নাম্বার নাই");
     }
 
-    // যদি ডাটা থাকে তবে ফলাফল দেখাবে
-    res.style.display = "block";
-    res.innerHTML = `<strong>📌 ফলাফল:</strong> সার্ভিসটি বর্তমানে আপডেট করা হচ্ছে।`;
-}
+    function sendToWhatsApp() {
+        const name = document.getElementById('wa-name').value;
+        const phone = document.getElementById('wa-phone').value;
+        const loc = document.getElementById('wa-loc').value;
+        const servType = document.getElementById('service').value || "সাধারণ";
+
+        if(!name || !phone || !loc) {
+            alert("সবগুলো ঘর পূরণ করুন");
+            return;
+        }
+
+        const text = `হ্যালো শুভ ভাই,%0Aনতুন তথ্য:%0A📌 নাম: ${name}%0A📞 নম্বর: ${phone}%0A📍 এলাকা: ${loc}`;
+        window.open(`https://api.whatsapp.com/send?phone=${myNumber}&text=${text}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
