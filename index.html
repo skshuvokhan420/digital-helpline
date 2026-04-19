@@ -82,7 +82,7 @@
     <div class="wa-section">
         <h3 style="margin:0 0 10px 0; color: #0d47a1; font-size: 16px;">📝 নতুন তথ্য যোগ করুন</h3>
         <input type="text" id="wa-name" placeholder="নাম বা প্রতিষ্ঠানের নাম">
-        <input type="tel" id="wa-phone" placeholder="মোাবাইল নম্বর">
+        <input type="tel" id="wa-phone" placeholder="মোবাইল নম্বর">
         <button class="wa-btn" onclick="sendToWhatsApp()">📲 হোয়াটসঅ্যাপে পাঠান</button>
     </div>
 
@@ -102,10 +102,6 @@
         "Dhaka": {
             "ঢাকা": ["সদর", "সাভার", "ধামরাই", "কেরানীগঞ্জ"],
             "গাজীপুর": ["সদর", "কালিয়াকৈর", "শ্রীপুর"]
-        },
-        "Chattogram": {
-            "চট্টগ্রাম": ["সদর", "পটিয়া", "হাটহাজারী"],
-            "কুমিল্লা": ["সদর", "লাকসাম", "চৌদ্দগ্রাম"]
         }
     };
 
@@ -143,20 +139,19 @@
         if (serv === "999") { window.location.href = "tel:999"; return; }
 
         if(!thana || !serv) {
-            alert("অনুগ্রহ করে সব ঘর পূরণ করুন!");
+            alert("সবগুলো ঘর পূরণ করুন!");
             return;
         }
 
-        res.style.display = "block";
-
-        // আইনজীবী ও নেত্রকোনা জেলা হলে আপনার দেওয়া নম্বরটি দেখাবে
+        // সব তথ্য এখন স্ক্রিনে পপ-আপ আকারে ভেসে উঠবে
         if (serv === "lawyer" && dist === "নেত্রকোনা") {
-            res.innerHTML = `<strong>⚖️ আইনজীবী তথ্য:</strong><br>
-                             স্থান: নেত্রকোনা জজ কোর্ট<br>
-                             মোবাইল: <a href="tel:01718037814" style="color: #009432; font-weight: bold; text-decoration: none;">01718037814</a>`;
+            const message = "⚖️ আইনজীবী তথ্য\n\nস্থান: নেত্রকোনা জজ কোর্ট\nমোবাইল: 01718037814\n\nআপনি কি সরাসরি কল করতে চান?";
+            if (confirm(message)) {
+                window.location.href = "tel:01718037814";
+            }
         } else {
-            res.innerHTML = `<strong>📌 ফলাফল:</strong><br> দুঃখিত, বর্তমানে ${thana} এলাকায় এই সেবার কোনো তথ্য ডাটাবেজে নেই। খুব দ্রুত যোগ করা হবে।`;
-            alert("দুঃখিত, কোনো নাম্বার নাই");
+            // অন্য কোনো তথ্য না থাকলে এটি দেখাবে
+            alert("📌 দুঃখিত!\n\nবর্তমানে " + thana + " এলাকায় এই সেবার বিস্তারিত তথ্য আমাদের কাছে নেই। খুব দ্রুত যোগ করা হবে।");
         }
     }
 
