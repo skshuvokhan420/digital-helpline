@@ -166,7 +166,29 @@
         if(!name || !phone) { alert("নাম ও নম্বর দিন"); return; }
         const text = `হ্যালো শুভ ভাই,%0Aনতুন হেল্পলাইন তথ্য:%0Aনাম: ${name}%0Aফোন: ${phone}`;
         window.open(`https://api.whatsapp.com/send?phone=${myNumber}&text=${text}`, '_blank');
+    }function updateDistricts() {
+    const division = document.getElementById('division').value;
+    const districtSelect = document.getElementById('district');
+    districtSelect.innerHTML = '<option value="">জেলা বেছে নিন</option>';
+
+    const districts = {
+        dhaka: ["ঢাকা", "গাজীপুর", "নারায়ণগঞ্জ", "নরসিংদী", "মানিকগঞ্জ", "মুন্সীগঞ্জ", "ফরিদপুর", "মাদারীপুর", "শরীয়তপুর", "রাজবাড়ী", "গোপালগঞ্জ", "টাঙ্গাইল", "কিশোরগঞ্জ"],
+        mymensingh: ["ময়মনসিংহ", "নেত্রকোনা", "শেরপুর", "জামালপুর"],
+        chittagong: ["চট্টগ্রাম", "কক্সবাজার", "ব্রাহ্মণবাড়িয়া", "চাঁদপুর", "লক্ষ্মীপুর", "নোয়াখালী", "ফেনী", "খাগড়াছড়ি", "রাঙ্গামাটি", "বান্দরবান", "কুমিল্লা"],
+        rajshahi: ["রাজশাহী", "চাঁপাইনবাবগঞ্জ", "নাটোর", "নওগাঁ", "পাবনা", "সিরাজগঞ্জ", "বগুড়া", "জয়পুরহাট"],
+        sylhet: ["সিলেট", "মৌলভীবাজার", "হবিগঞ্জ", "সুনামগঞ্জ"]
+    };
+
+    if (division && districts[division]) {
+        districts[division].forEach(dist => {
+            const option = document.createElement('option');
+            option.value = dist;
+            option.textContent = dist;
+            districtSelect.appendChild(option);
+        });
     }
+}
+
 </script>
 
 </body>
