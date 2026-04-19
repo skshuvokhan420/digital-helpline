@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ডিজিটাল হেল্পライン - এস.কে. শুভ</title>
+    <title>ডিজিটাল হেল্পলাইন - এস.কে. শুভ</title>
     <style>
         :root { --primary: #009432; --whatsapp: #25D366; --train: #da9100; --bg: #f0f2f5; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
@@ -82,7 +82,7 @@
     <div class="wa-section">
         <h3 style="margin:0 0 10px 0; color: #0d47a1; font-size: 16px;">📝 নতুন তথ্য যোগ করুন</h3>
         <input type="text" id="wa-name" placeholder="নাম বা প্রতিষ্ঠানের নাম">
-        <input type="tel" id="wa-phone" placeholder="মোবাইল নম্বর">
+        <input type="tel" id="wa-phone" placeholder="মোাবাইল নম্বর">
         <button class="wa-btn" onclick="sendToWhatsApp()">📲 হোয়াটসঅ্যাপে পাঠান</button>
     </div>
 
@@ -90,10 +90,8 @@
 </div>
 
 <script>
-    // আপনার হোয়াটসঅ্যাপ নম্বর
     const myNumber = "8801771100830"; 
 
-    // ডাটাবেজ
     const data = {
         "Mymensingh": {
             "ময়মনসিংহ": ["সদর", "মুক্তাগাছা", "ফুলপুর", "ত্রিশাল", "ভালুকা", "গফরগাঁও", "ঈশ্বরগঞ্জ", "হালুয়াঘাট"],
@@ -137,6 +135,7 @@
     }
 
     function searchInfo() {
+        const dist = document.getElementById('district').value;
         const thana = document.getElementById('thana').value;
         const serv = document.getElementById('service').value;
         const res = document.getElementById('result');
@@ -149,8 +148,16 @@
         }
 
         res.style.display = "block";
-        res.innerHTML = `<strong>📌 ফলাফল:</strong><br> দুঃখিত, বর্তমানে ${thana} এলাকায় এই সেবার কোনো তথ্য ডাটাবেজে নেই। খুব দ্রুত যোগ করা হবে।`;
-        alert("দুঃখিত, কোনো নাম্বার নাই");
+
+        // আইনজীবী ও নেত্রকোনা জেলা হলে আপনার দেওয়া নম্বরটি দেখাবে
+        if (serv === "lawyer" && dist === "নেত্রকোনা") {
+            res.innerHTML = `<strong>⚖️ আইনজীবী তথ্য:</strong><br>
+                             স্থান: নেত্রকোনা জজ কোর্ট<br>
+                             মোবাইল: <a href="tel:01718037814" style="color: #009432; font-weight: bold; text-decoration: none;">01718037814</a>`;
+        } else {
+            res.innerHTML = `<strong>📌 ফলাফল:</strong><br> দুঃখিত, বর্তমানে ${thana} এলাকায় এই সেবার কোনো তথ্য ডাটাবেজে নেই। খুব দ্রুত যোগ করা হবে।`;
+            alert("দুঃখিত, কোনো নাম্বার নাই");
+        }
     }
 
     function bookTicket() {
