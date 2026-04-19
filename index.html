@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ডিজিটাল হেল্পলাইন - এস.কে. শুভ</title>
+    <title>ডিজিটাল হেল্পライン - এস.কে. শুভ</title>
     <style>
-        :root { --primary: #009432; --whatsapp: #25D366; --bg: #f0f2f5; }
+        :root { --primary: #009432; --whatsapp: #25D366; --train: #da9100; --bg: #f0f2f5; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
         .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 10px solid var(--primary); }
         h2 { color: var(--primary); text-align: center; margin-bottom: 5px; }
-        .tagline { text-align: center; color: #666; font-size: 14px; margin-bottom: 20px; }
-        label { font-weight: bold; display: block; margin-top: 12px; color: #333; }
+        .tagline { text-align: center; color: #666; font-size: 13px; margin-bottom: 20px; }
+        
+        label { font-weight: bold; display: block; margin-top: 12px; color: #333; font-size: 14px; }
         select, input, button { width: 100%; padding: 12px; margin-top: 5px; border-radius: 10px; border: 1px solid #ddd; font-size: 16px; outline: none; box-sizing: border-box; }
-        button { background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        .wa-section { background: #e7f3ff; padding: 15px; border-radius: 15px; margin-top: 30px; border: 1px solid #b2d7ff; }
+        
+        button { background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        button:active { transform: scale(0.98); }
+        
+        .train-section { background: #fff3e0; padding: 15px; border-radius: 15px; border: 1px solid #ffcc80; margin-top: 20px; }
+        .ticket-btn { background: var(--train); margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        
+        .wa-section { background: #e7f3ff; padding: 15px; border-radius: 15px; margin-top: 25px; border: 1px solid #b2d7ff; }
         .wa-btn { background: var(--whatsapp); color: white; border: none; }
-        .result-box { margin-top: 20px; padding: 15px; background: #fff9c4; border-radius: 10px; border-left: 5px solid #fbc02d; display: none; }
+        
+        .result-box { margin-top: 20px; padding: 15px; background: #fff9c4; border-radius: 10px; border-left: 5px solid #fbc02d; display: none; font-size: 14px; line-height: 1.6; }
         footer { text-align: center; margin-top: 20px; font-size: 12px; color: #888; }
     </style>
 </head>
@@ -23,7 +31,7 @@
 
 <div class="container">
     <h2>🇧🇩 ডিজিটাল হেল্পলাইন</h2>
-    <p class="tagline">অ্যাপে কোন সমস্যা হলে সরাসরি আমাদের সাথে যোগাযোগ করুন নিচে👇 whatsapp </p>
+    <p class="tagline">আপনার হাতের মুঠোয় সব জরুরি সেবা</p>
     
     <label>বিভাগ</label>
     <select id="division" onchange="updateDistricts()">
@@ -31,6 +39,8 @@
         <option value="Dhaka">ঢাকা</option>
         <option value="Mymensingh">ময়মনসিংহ</option>
         <option value="Chattogram">চট্টগ্রাম</option>
+        <option value="Rajshahi">রাজশাহী</option>
+        <option value="Sylhet">সিলেট</option>
     </select>
 
     <label>জেলা</label>
@@ -43,24 +53,35 @@
         <option value="">আগে জেলা বেছে নিন</option>
     </select>
 
-    <label>সেবা</label>
+    <label>সেবা নির্বাচন করুন</label>
     <select id="service">
         <option value="">সেবা নির্বাচন করুন</option>
-        <option value="জরুরি নাম্বার">📞 জরুরি নাম্বার (999)</option>
-        <option value="রক্তদাতা">🩸 রক্তদাতা (Blood)</option>
-        <option value="অ্যাম্বুলেন্স">🚑 অ্যাম্বুলেন্স</option>
-        <option value="ফায়ার সার্ভিস">🔥 ফায়ার সার্ভিস</option>
-        <option value="পুলিশ">🚓 পুলিশ/থানা</option>
-        <option value="ডাক্তার">👨‍⚕️ বিশেষজ্ঞ ডাক্তার</option>
+        <option value="999">📞 জরুরি নাম্বার (999)</option>
+        <option value="blood">🩸 রক্তদাতা (Blood)</option>
+        <option value="ambulance">🚑 অ্যাম্বুলেন্স</option>
+        <option value="fire">🔥 ফায়ার সার্ভিস</option>
+        <option value="police">🚓 পুলিশ/থানা</option>
+        <option value="doctor">👨‍⚕️ বিশেষজ্ঞ ডাক্তার</option>
+        <option value="pharmacy">💊 ফার্মেসি</option>
+        <option value="hospital">🏥 হাসপাতাল</option>
+        <option value="journalist">🎤 সাংবাদিক</option>
+        <option value="lawyer">⚖️ আইনজীবী</option>
+        <option value="electrician">⚡ ইলেকট্রিশিয়ান</option>
     </select>
 
     <button onclick="searchInfo()">🔍 তথ্য খুঁজুন</button>
 
+    <div class="train-section">
+        <strong style="color: #e65100; font-size: 15px;">🚆 ঢাকা (কমলাপুর) ⇄ মোহনগঞ্জ</strong>
+        <p style="font-size: 12px; color: #5d4037; margin: 5px 0;">মোহনগঞ্জ ও হাওর এক্সপ্রেসের টিকেট কাটুন</p>
+        <button class="ticket-btn" onclick="bookTicket()">🎫 অনলাইন টিকেট কাটুন</button>
+    </div>
+
     <div id="result" class="result-box"></div>
 
     <div class="wa-section">
-        <h3 style="margin:0 0 10px 0; color: #0d47a1; font-size: 17px;">📝 নতুন নম্বর যোগ করুন</h3>
-        <input type="text" id="wa-name" placeholder="প্রতিষ্ঠানের নাম">
+        <h3 style="margin:0 0 10px 0; color: #0d47a1; font-size: 16px;">📝 নতুন তথ্য যোগ করুন</h3>
+        <input type="text" id="wa-name" placeholder="নাম বা প্রতিষ্ঠানের নাম">
         <input type="tel" id="wa-phone" placeholder="মোবাইল নম্বর">
         <button class="wa-btn" onclick="sendToWhatsApp()">📲 হোয়াটসঅ্যাপে পাঠান</button>
     </div>
@@ -69,21 +90,24 @@
 </div>
 
 <script>
+    // আপনার হোয়াটসঅ্যাপ নম্বর
     const myNumber = "8801771100830"; 
 
-    // ডাটাবেজ (বিভাগ > জেলা > থানা)
+    // ডাটাবেজ
     const data = {
-        "Dhaka": {
-            "ঢাকা": ["সদর", "সাভার", "ধামরাই"],
-            "গাজীপুর": ["সদর", "কালিয়াকৈর", "শ্রীপুর"]
-        },
         "Mymensingh": {
-            "ময়মনসিংহ": ["সদর", "মুক্তাগাছা", "ফুলপুর", "ত্রিশাল"],
-            "নেত্রকোনা": ["সদর", "মদন", "মোহনগঞ্জ", "পূর্বধলা", "কলমাকান্দা"]
+            "ময়মনসিংহ": ["সদর", "মুক্তাগাছা", "ফুলপুর", "ত্রিশাল", "ভালুকা", "গফরগাঁও", "ঈশ্বরগঞ্জ", "হালুয়াঘাট"],
+            "নেত্রকোনা": ["সদর", "মদন", "মোহনগঞ্জ", "পূর্বধলা", "কলমাকান্দা", "বারহাট্টা", "দুর্গাপুর", "খালিয়াজুরী", "কেন্দুয়া", "আটপাড়া"],
+            "শেরপুর": ["সদর", "নালিতাবাড়ী", "নকলা"],
+            "জামালপুর": ["সদর", "বকশীগঞ্জ", "ইসলামপুর"]
+        },
+        "Dhaka": {
+            "ঢাকা": ["সদর", "সাভার", "ধামরাই", "কেরানীগঞ্জ"],
+            "গাজীপুর": ["সদর", "কালিয়াকৈর", "শ্রীপুর"]
         },
         "Chattogram": {
             "চট্টগ্রাম": ["সদর", "পটিয়া", "হাটহাজারী"],
-            "কুমিল্লা": ["সদর", "চৌদ্দগ্রাম", "লাকসাম"]
+            "কুমিল্লা": ["সদর", "লাকসাম", "চৌদ্দগ্রাম"]
         }
     };
 
@@ -91,10 +115,8 @@
         const div = document.getElementById('division').value;
         const distSelect = document.getElementById('district');
         const thanaSelect = document.getElementById('thana');
-        
         distSelect.innerHTML = '<option value="">জেলা সিলেক্ট করুন</option>';
         thanaSelect.innerHTML = '<option value="">আগে জেলা বেছে নিন</option>';
-
         if(div && data[div]) {
             for(let dist in data[div]) {
                 distSelect.add(new Option(dist, dist));
@@ -106,9 +128,7 @@
         const div = document.getElementById('division').value;
         const dist = document.getElementById('district').value;
         const thanaSelect = document.getElementById('thana');
-        
         thanaSelect.innerHTML = '<option value="">থানা সিলেক্ট করুন</option>';
-
         if(div && dist && data[div][dist]) {
             data[div][dist].forEach(th => {
                 thanaSelect.add(new Option(th, th));
@@ -121,26 +141,28 @@
         const serv = document.getElementById('service').value;
         const res = document.getElementById('result');
 
-        if (serv === "জরুরি নাম্বার") {
-            window.location.href = "tel:999";
-            return;
-        }
+        if (serv === "999") { window.location.href = "tel:999"; return; }
 
         if(!thana || !serv) {
-            alert("দুঃখিত, কোনো তথ্য পাওয়া যায়নি! সব ঘর পূরণ করুন।");
+            alert("অনুগ্রহ করে সব ঘর পূরণ করুন!");
             return;
         }
 
         res.style.display = "block";
-        res.innerHTML = `<strong>📌 ফলাফল:</strong><br> ${thana} এলাকায় বর্তমানে "${serv}" ক্যাটাগরিতে কোনো নম্বর নেই।`;
+        res.innerHTML = `<strong>📌 ফলাফল:</strong><br> দুঃখিত, বর্তমানে ${thana} এলাকায় এই সেবার কোনো তথ্য ডাটাবেজে নেই। খুব দ্রুত যোগ করা হবে।`;
         alert("দুঃখিত, কোনো নাম্বার নাই");
+    }
+
+    function bookTicket() {
+        alert("টিকেট কাটার সময় 'From' এ DHAKA এবং 'To' এ MOHANGANJ লিখুন।");
+        window.open("https://eticket.railway.gov.bd/", "_blank");
     }
 
     function sendToWhatsApp() {
         const name = document.getElementById('wa-name').value;
         const phone = document.getElementById('wa-phone').value;
         if(!name || !phone) { alert("নাম ও নম্বর দিন"); return; }
-        const text = `হ্যালো শুভ ভাই, নতুন তথ্য: %0Aনাম: ${name}%0Aফোন: ${phone}`;
+        const text = `হ্যালো শুভ ভাই,%0Aনতুন হেল্পলাইন তথ্য:%0Aনাম: ${name}%0Aফোন: ${phone}`;
         window.open(`https://api.whatsapp.com/send?phone=${myNumber}&text=${text}`, '_blank');
     }
 </script>
