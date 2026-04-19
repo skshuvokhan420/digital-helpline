@@ -10,19 +10,14 @@
         .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 10px solid var(--primary); }
         h2 { color: var(--primary); text-align: center; margin-bottom: 5px; }
         .tagline { text-align: center; color: #666; font-size: 13px; margin-bottom: 20px; }
-        
         label { font-weight: bold; display: block; margin-top: 12px; color: #333; font-size: 14px; }
         select, input, button { width: 100%; padding: 12px; margin-top: 5px; border-radius: 10px; border: 1px solid #ddd; font-size: 16px; outline: none; box-sizing: border-box; }
-        
         button { background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
         button:active { transform: scale(0.98); }
-        
         .train-section { background: #fff3e0; padding: 15px; border-radius: 15px; border: 1px solid #ffcc80; margin-top: 20px; }
         .ticket-btn { background: var(--train); margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        
         .wa-section { background: #e7f3ff; padding: 15px; border-radius: 15px; margin-top: 25px; border: 1px solid #b2d7ff; }
         .wa-btn { background: var(--whatsapp); color: white; border: none; }
-        
         .result-box { margin-top: 20px; padding: 15px; background: #fff9c4; border-radius: 10px; border-left: 5px solid #fbc02d; display: none; font-size: 14px; line-height: 1.6; }
         footer { text-align: center; margin-top: 20px; font-size: 12px; color: #888; }
     </style>
@@ -93,15 +88,52 @@
     const myNumber = "8801771100830"; 
 
     const data = {
-        "Mymensingh": {
-            "ময়মনসিংহ": ["সদর", "মুক্তাগাছা", "ফুলপুর", "ত্রিশাল", "ভালুকা", "গফরগাঁও", "ঈশ্বরগঞ্জ", "হালুয়াঘাট"],
-            "নেত্রকোনা": ["সদর", "মদন", "মোহনগঞ্জ", "পূর্বধলা", "কলমাকান্দা", "বারহাট্টা", "দুর্গাপুর", "খালিয়াজুরী", "কেন্দুয়া", "আটপাড়া"],
-            "শেরপুর": ["সদর", "নালিতাবাড়ী", "নকলা"],
-            "জামালপুর": ["সদর", "বকশীগঞ্জ", "ইসলামপুর"]
-        },
         "Dhaka": {
-            "ঢাকা": ["সদর", "সাভার", "ধামরাই", "কেরানীগঞ্জ"],
-            "গাজীপুর": ["সদর", "কালিয়াকৈর", "শ্রীপুর"]
+            "ঢাকা": ["সদর", "সাভার", "ধামরাই", "কেরানীগঞ্জ", "দোহার", "নবাবগঞ্জ"],
+            "গাজীপুর": ["সদর", "কালিয়াকৈর", "শ্রীপুর", "কাপাসিয়া", "কালীগঞ্জ"],
+            "নারায়ণগঞ্জ": ["সদর", "সোনারগাঁও", "রূপগঞ্জ", "আড়াইহাজার", "বন্দর"],
+            "নরসিংদী": ["সদর", "বেলাবো", "মনোহরদী", "রায়পুরা", "শিবপুর", "পলাশ"],
+            "মানিকগঞ্জ": ["সদর", "সিংগাইর", "শিবালয়", "ঘিওর", "হরিরামপুর"],
+            "মুন্সীগঞ্জ": ["সদর", "গজারিয়া", "লোহজং", "শ্রীনগর", "টংগিবাড়ী"],
+            "ফরিদপুর": ["সদর", "ভাঙ্গা", "বোয়ালমারী", "মধুখালী", "নগরকান্দা"],
+            "মাদারীপুর": ["সদর", "শিবচর", "কালকিনি", "রাজৈর"],
+            "শরীয়তপুর": ["সদর", "জাজিরা", "নড়িয়া", "ভেদরগঞ্জ", "গোসাইরহাট"],
+            "রাজবাড়ী": ["সদর", "গোয়ালন্দ", "পাংশা", "বালিয়াকান্দি"],
+            "গোপালগঞ্জ": ["সদর", "টুঙ্গিপাড়া", "কোটালীপাড়া", "কাশিয়ানী"],
+            "টাঙ্গাইল": ["সদর", "কালিহাতী", "মধুপুর", "মির্জাপুর", "ঘাটাইল", "সখিপুর"],
+            "কিশোরগঞ্জ": ["সদর", "ভৈরব", "বাজিতপুর", "কটিয়াদী", "করিমগঞ্জ", "নিকলী"]
+        },
+        "Mymensingh": {
+            "ময়মনসিংহ": ["সদর", "মুক্তাগাছা", "ফুলপুর", "ত্রিশাল", "ভালুকা", "গফরগাঁও", "ঈশ্বরগঞ্জ", "হালুয়াঘাট", "ফুলবাড়ীয়া", "নন্দাইল", "ধোবাউড়া"],
+            "নেত্রকোনা": ["সদর", "মদন", "মোহনগঞ্জ", "পূর্বধলা", "কলমাকান্দা", "বারহাট্টা", "দুর্গাপুর", "খালিয়াজুরী", "কেন্দুয়া", "আটপাড়া"],
+            "শেরপুর": ["সদর", "নালিতাবাড়ী", "নকলা", "ঝিনাইগাতী", "শ্রীবরদী"],
+            "জামালপুর": ["সদর", "বকশীগঞ্জ", "ইসলামপুর", "দেওয়ানগঞ্জ", "মাদারগঞ্জ", "মেলান্দহ", "সরিষাবাড়ী"]
+        },
+        "Chattogram": {
+            "চট্টগ্রাম": ["সদর", "পটিয়া", "হাটহাজারী", "সীতাকুণ্ড", "রাউজান", "ফটিকছড়ি"],
+            "কক্সবাজার": ["সদর", "উখিয়া", "টেকনাফ", "রামু", "চৌফদন্ডী"],
+            "কুমিল্লা": ["সদর", "চৌদ্দগ্রাম", "লাকসাম", "দাউদকান্দি", "বরুড়া"],
+            "ব্রাহ্মণবাড়িয়া": ["সদর", "আশুগঞ্জ", "নাসিরনগর", "কসবা"],
+            "চাঁদপুর": ["সদর", "মতলব", "হাজীগঞ্জ", "হাইমচর"],
+            "লক্ষ্মীপুর": ["সদর", "রায়পুর", "রামগঞ্জ"],
+            "নোয়াখালী": ["সদর", "চাটখিল", "বেগমগঞ্জ", "হাতিয়া"],
+            "ফেনী": ["সদর", "দাগনভূঞা", "ছাগলনাইয়া"]
+        },
+        "Rajshahi": {
+            "রাজশাহী": ["সদর", "বাঘা", "পুঠিয়া", "গোদাগাড়ী"],
+            "চাঁপাইনবাবগঞ্জ": ["সদর", "শিবগঞ্জ", "গোমস্তাপুর"],
+            "নাটোর": ["সদর", "সিংড়া", "বড়াইগ্রাম"],
+            "নওগাঁ": ["সদর", "বদলগাছী", "ধামইরহাট"],
+            "পাবনা": ["সদর", "ঈশ্বরদী", "বেড়া"],
+            "সিরাজগঞ্জ": ["সদর", "উল্লাপাড়া", "শাহজাদপুর"],
+            "বগুড়া": ["সদর", "শেরপুর", "শিবগঞ্জ", "ধুনট"],
+            "জয়পুরহাট": ["সদর", "পাঁচবিবি"]
+        },
+        "Sylhet": {
+            "সিলেট": ["সদর", "গোলাপগঞ্জ", "বিয়ানীবাজার", "জৈন্তাপুর", "ফেঞ্চুগঞ্জ"],
+            "মৌলভীবাজার": ["সদর", "শ্রীমঙ্গল", "কুলাউড়া", "জুড়ী"],
+            "হবিগঞ্জ": ["সদর", "নবীগঞ্জ", "মাধবপুর", "চুনারুঘাট"],
+            "সুনামগঞ্জ": ["সদর", "জগন্নাথপুর", "ছাতক", "তাহিরপুর", "ধর্মপাশা"]
         }
     };
 
@@ -134,24 +166,15 @@
         const dist = document.getElementById('district').value;
         const thana = document.getElementById('thana').value;
         const serv = document.getElementById('service').value;
-        const res = document.getElementById('result');
 
         if (serv === "999") { window.location.href = "tel:999"; return; }
+        if(!thana || !serv) { alert("সবগুলো ঘর পূরণ করুন!"); return; }
 
-        if(!thana || !serv) {
-            alert("সবগুলো ঘর পূরণ করুন!");
-            return;
-        }
-
-        // সব তথ্য এখন স্ক্রিনে পপ-আপ আকারে ভেসে উঠবে
         if (serv === "lawyer" && dist === "নেত্রকোনা") {
             const message = "⚖️ আইনজীবী তথ্য\n\nস্থান: নেত্রকোনা জজ কোর্ট\nমোবাইল: 01718037814\n\nআপনি কি সরাসরি কল করতে চান?";
-            if (confirm(message)) {
-                window.location.href = "tel:01718037814";
-            }
+            if (confirm(message)) { window.location.href = "tel:01718037814"; }
         } else {
-            // অন্য কোনো তথ্য না থাকলে এটি দেখাবে
-            alert("📌 দুঃখিত!\n\nবর্তমানে " + thana + " এলাকায় এই সেবার বিস্তারিত তথ্য আমাদের কাছে নেই। খুব দ্রুত যোগ করা হবে।");
+            alert("📌 দুঃখিত!\n\nবর্তমানে " + thana + " এলাকায় এই সেবার বিস্তারিত তথ্য আমাদের কাছে নেই।");
         }
     }
 
@@ -166,29 +189,7 @@
         if(!name || !phone) { alert("নাম ও নম্বর দিন"); return; }
         const text = `হ্যালো শুভ ভাই,%0Aনতুন হেল্পলাইন তথ্য:%0Aনাম: ${name}%0Aফোন: ${phone}`;
         window.open(`https://api.whatsapp.com/send?phone=${myNumber}&text=${text}`, '_blank');
-    }function updateDistricts() {
-    const division = document.getElementById('division').value;
-    const districtSelect = document.getElementById('district');
-    districtSelect.innerHTML = '<option value="">জেলা বেছে নিন</option>';
-
-    const districts = {
-        dhaka: ["ঢাকা", "গাজীপুর", "নারায়ণগঞ্জ", "নরসিংদী", "মানিকগঞ্জ", "মুন্সীগঞ্জ", "ফরিদপুর", "মাদারীপুর", "শরীয়তপুর", "রাজবাড়ী", "গোপালগঞ্জ", "টাঙ্গাইল", "কিশোরগঞ্জ"],
-        mymensingh: ["ময়মনসিংহ", "নেত্রকোনা", "শেরপুর", "জামালপুর"],
-        chittagong: ["চট্টগ্রাম", "কক্সবাজার", "ব্রাহ্মণবাড়িয়া", "চাঁদপুর", "লক্ষ্মীপুর", "নোয়াখালী", "ফেনী", "খাগড়াছড়ি", "রাঙ্গামাটি", "বান্দরবান", "কুমিল্লা"],
-        rajshahi: ["রাজশাহী", "চাঁপাইনবাবগঞ্জ", "নাটোর", "নওগাঁ", "পাবনা", "সিরাজগঞ্জ", "বগুড়া", "জয়পুরহাট"],
-        sylhet: ["সিলেট", "মৌলভীবাজার", "হবিগঞ্জ", "সুনামগঞ্জ"]
-    };
-
-    if (division && districts[division]) {
-        districts[division].forEach(dist => {
-            const option = document.createElement('option');
-            option.value = dist;
-            option.textContent = dist;
-            districtSelect.appendChild(option);
-        });
     }
-}
-
 </script>
 
 </body>
